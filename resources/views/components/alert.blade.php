@@ -2,7 +2,7 @@
 
 <div>
     Hello!
-    <p>wooo</p>
-    {{ $message }}
+    <p class=>wooo</p>
+    <p class='text-red-950'>{{ $message }}</p>
     {{ $attributes }}
 </div>
