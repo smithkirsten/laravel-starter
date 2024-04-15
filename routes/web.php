@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,24 +17,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.index');
+
+    return view('pages.index', [
+        'posts' => Post::all()
+    ]);
 });
 
 Route::get('posts/{post}', function($slug) {
-    
-    $path = __DIR__ . "/../resources/posts/{$slug}.html";
-
-    if(!file_exists($path)) {
-        abort(404);
-    }
-
-    $post = cache()->remember("posts.{$slug}", 5, function () use($path) {
-        return file_get_contents($path);
-    });
-    
+    //access the Post class and use its find method to get a post by its slug
     return view('pages.post', [
-        'post' => file_get_contents($path)
+        'post' => Post::find($slug),
+        'comments' => Comment::findCommentsByPost($slug)
     ]);
 
-})->where('post', '[A-z_\-]+');
-?>
+})->where('post', '[A-z_\-]+'); 
+
+Route::get('/about', function () {
+    return view('pages.about');
+});
+
+Route::get('/contribute', function () {
+    return view('pages.contribute');
+});

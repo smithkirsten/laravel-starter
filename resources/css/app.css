@@ -2,21 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
-  background: white;
-  color: black;
-  max-width: 600px;
-  margin: auto;
-  font-family: sans-serif;
-
+  @apply font-sans bg-blue-50 flex-col justify-center m-auto
+}
+a {
+  @apply underline
+}
+a:hover {
+  @apply text-blue-900
 }
 
-p {
-  line-height: 1.6;
-}
-
-article {
-  margin-top: 3rems;
-  padding: 3rems;
-  border-top: 1px solid #c5c5c5;
-}
